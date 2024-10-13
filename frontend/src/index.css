@@ -1,39 +1,40 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-	background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/bg.jpg");
+	background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/bg.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 }
 
+/* styles.css หรือไฟล์ CSS ที่คุณใช้ */
+
+/* สำหรับ Webkit (Chrome, Safari) */
 ::-webkit-scrollbar {
-	width: 8px;
+    width: 8px; /* ความกว้างของ scrollbar */
 }
 
 ::-webkit-scrollbar-track {
-	background: #555;
+    background: #f1f1f1; /* สีพื้นหลังของ track */
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #121212;
-	border-radius: 10px;
+    background: #000; /* สีของ scrollbar */
+    border-radius: 10px; /* ทำให้มุมของ scrollbar มีความโค้ง */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #242424;
+    background: #555; /* เปลี่ยนสีเมื่อ hover */
 }
 
-
-.shake {
-	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.2s both;
-	transform: translate3d(0, 0, 0);
-	backface-visibility: hidden;
-	perspective: 1000px;
+/* สำหรับ Firefox */
+* {
+    scrollbar-width: thin; /* ทำให้ scrollbar มีความบาง */
+    scrollbar-color: #000 #f1f1f1; /* สีของ thumb และ track */
 }
+
 
 @keyframes shake {
 	10%,

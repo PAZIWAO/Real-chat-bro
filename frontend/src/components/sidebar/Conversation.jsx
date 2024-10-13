@@ -1,22 +1,36 @@
-const Conversation = () => {
-  return <>
-  <div className='flex gap-2 items-center hover:bg-gray-600 rounded p-2 py-1 cursor-pointer'>
-    <div className='avatar online'>
-    <div className='w-12 rounded-full'>
-        <img src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png" alt="user avatar" />
-    </div>
-    </div>
-  </div>
+import { useSocketContext } from "../../context/SocketContext";
+import useConversation from "../../zustand/useConversation";
 
+const Conversation = ({ conversation, lastIdx }) => {
+  const { selectedConversation, setSelectedConversation } = useConversation();
 
-  <div className='flex flex-col flex-1'>
-    <div className='flex gap-3 justify-between'>
-        <p className='font-bold text-gray-200'>Ton</p>
-    </div>
-  </div>
+  const isSelected = selectedConversation?._id === conversation._id;
+  const {onlineUsers} = useSocketContext();
+  const isOnline = onlineUsers.includes(conversation._id)
+  return (
+    <>
+      <div
+        className={`flex gap-2 items-center hover:bg-gray-600 rounded p-4 py-2 cursor-pointer w-full
+        ${isSelected ? "bg-gray-800" : ""}
+        `}
+        onClick={() => setSelectedConversation(conversation)}
+      >
+        <div className={`avatar ${isOnline ? "online" : ""}`}>
+          <div className="w-16 rounded-full">
+            <img src={conversation.profilePic} alt="user avatar" />
+          </div>
+        </div>
 
-  <div className='divider my-0 py-0 h-1' />
-  </>;
+        <div className="flex flex-col flex-1">
+          <div className="flex gap-3 justify-between">
+            <p className="font-bold text-gray-200">{conversation.fullName}</p>
+          </div>
+        </div>
+      </div>
+
+      {!lastIdx && <div className="divider my-0 py-0 h-1" />}
+    </>
+  );
 };
 
 export default Conversation;
